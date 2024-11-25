@@ -7,6 +7,7 @@ use dotenv::dotenv;
 #[derive(Clone, Debug)]
 pub struct SmtpConfig {
     pub domain_name: String,
+    pub email_sender_name: String,
     pub id: String,
     pub password: String,
     pub message_id_domain: String,
@@ -30,6 +31,7 @@ impl SmtpConfig {
 
         Self {
             domain_name: env::var(SMTP_DOMAIN_NAME_KEY).unwrap(),
+            email_sender_name: env::var(SMTP_EMAIL_SENDER_NAME_KEY).unwrap(),
             id: env::var(SMTP_LOGIN_ID_KEY).unwrap(),
             password: env::var(SMTP_LOGIN_PASSWORD_KEY).unwrap(),
             message_id_domain: env::var(MESSAGE_ID_DOMAIN_KEY)

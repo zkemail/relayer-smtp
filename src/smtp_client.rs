@@ -66,7 +66,10 @@ impl SmtpClient {
         body_html: String,
         body_attachments: Option<Vec<EmailAttachment>>,
     ) -> Result<String> {
-        let from_mbox = Mailbox::new(None, self.config.id.parse::<Address>()?);
+        let from_mbox = Mailbox::new(
+            Some(self.config.email_sender_name.clone()),
+            self.config.id.parse::<Address>()?,
+        );
         let to_mbox = Mailbox::new(None, to.parse::<Address>()?);
 
         let message_id = format!("<{}@{}>", Uuid::new_v4(), self.config.message_id_domain);
