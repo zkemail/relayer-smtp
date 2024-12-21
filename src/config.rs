@@ -1,10 +1,11 @@
 use crate::*;
 
+use dotenv::dotenv;
+use serde::{Deserialize, Serialize};
 use std::env;
 
-use dotenv::dotenv;
-
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct SmtpConfig {
     pub domain_name: String,
     pub email_sender_name: String,
@@ -13,13 +14,15 @@ pub struct SmtpConfig {
     pub message_id_domain: String,
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ServerConfig {
     pub host: String,
     pub port: u16,
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct RelayerSMTPConfig {
     pub smtp_config: SmtpConfig,
     pub server_config: ServerConfig,
