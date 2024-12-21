@@ -14,9 +14,6 @@ pub struct SmtpConfig {
     pub message_id_domain: String,
 }
 
-unsafe impl Send for SmtpConfig {}
-unsafe impl Sync for SmtpConfig {}
-
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ServerConfig {
@@ -30,6 +27,9 @@ pub struct RelayerSMTPConfig {
     pub smtp_config: SmtpConfig,
     pub server_config: ServerConfig,
 }
+
+unsafe impl Send for RelayerSMTPConfig {}
+unsafe impl Sync for RelayerSMTPConfig {}
 
 impl SmtpConfig {
     pub fn new() -> Self {
