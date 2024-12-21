@@ -3,6 +3,7 @@ pub mod server;
 pub mod smtp_client;
 pub mod strings;
 
+pub use crate::config::RelayerSMTPConfig;
 use config::*;
 use server::*;
 use smtp_client::*;
