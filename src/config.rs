@@ -14,6 +14,9 @@ pub struct SmtpConfig {
     pub message_id_domain: String,
 }
 
+unsafe impl Send for SmtpConfig {}
+unsafe impl Sync for SmtpConfig {}
+
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ServerConfig {
