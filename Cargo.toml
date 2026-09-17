@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-relayer-utils = { git = "https://github.com/zkemail/relayer-utils" }
+relayer-utils = { git = "https://github.com/zkemail/relayer-utils", rev = "fcd533329aae4a7bd32a4335a49e1bfcced10425" }
 anyhow = "1.0"
 tokio = { version = "1", features = ["full"] }
 lettre = { version = "0.10.4", features = ["tokio1", "tokio1-native-tls"] }
@@ -22,3 +22,11 @@ poseidon-rs = { git = "https://github.com/SoraSuegami/poseidon-rs.git", version 
 zk-regex-apis = { version = "2.0.2", git = "https://github.com/zkemail/zk-regex.git", branch = "main", default-features = false }
 slog = { version = "2.7.0", features = ["max_level_trace", "release_max_level_warn"] }
 uuid = { version = "1.10.0", features = ["v4"] }
+
+# zk-regex `main` no longer contains the `zk-regex-apis` crate (the 2.x line moved to the
+# `release/2.x` branch). Both this crate and the pinned relayer-utils revision request it from
+# `branch = "main"`, so redirect every request to the immutable `2.1.0` tag, which is the exact
+# commit Cargo.lock already resolved to. The double slash in the URL is deliberate: Cargo requires a
+# patch to point at a different source than the one it replaces.
+[patch."https://github.com/zkemail/zk-regex.git"]
+zk-regex-apis = { git = "https://github.com/zkemail//zk-regex", tag = "2.1.0" }
